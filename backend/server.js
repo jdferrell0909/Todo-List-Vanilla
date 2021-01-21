@@ -19,7 +19,7 @@ mongoose.connect(mongoURI, {
   .then(() => console.log('database connected......'))
   .catch((err) => console.log(err.messages));
 
-app.get('/api', async (req, res, next) => {
+app.get('/api/items', async (req, res, next) => {
   await Todo.find({})
     .then(data => {
       console.log('Get data successful');
@@ -31,7 +31,7 @@ app.get('/api', async (req, res, next) => {
     });
 })
 
-app.post('/api/addItem', (req, res, next) => {
+app.post('/api/items/addItem', (req, res, next) => {
   Todo.create({ text: req.body.text })
     .then(() => {
       console.log('Item created successfully');
@@ -43,7 +43,7 @@ app.post('/api/addItem', (req, res, next) => {
     });
 })
 
-app.delete('/api/deleteAll', (req, res, next) => {
+app.delete('/api/items/deleteAll', (req, res, next) => {
   Todo.deleteMany({})
     .then(() => {
       console.log('Clear all successful');
@@ -55,7 +55,7 @@ app.delete('/api/deleteAll', (req, res, next) => {
     });
 })
 
-app.delete('/api/deleteOne/:id', (req, res, next) => {
+app.delete('/api/items/deleteOne/:id', (req, res, next) => {
   const { id } = req.params;
   Todo.deleteOne({ _id: id })
     .then(() => {
