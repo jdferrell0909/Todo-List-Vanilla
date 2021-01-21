@@ -20,43 +20,57 @@ mongoose.connect(mongoURI, {
   .catch((err) => console.log(err.messages));
 
 app.get('/api', async (req, res, next) => {
-  console.log('inside GET')
   await Todo.find({})
     .then(data => {
-      console.log(data);
+      console.log('Get data successful');
       res.status(200).json(data);
     })
-    .catch(err => console.log(err.message));
+    .catch(err => {
+      console.log(err.messsage);
+      res.status(400).json(err.message);
+    });
 })
 
 app.post('/api/addItem', (req, res, next) => {
-  console.log('successful POST----> ', req.body.text);
   Todo.create({ text: req.body.text })
-    .then((result) => console.log(result))
-    .catch((err) => console.log(err.message));
-  res.status(201).json('successful');
+    .then(() => {
+      console.log('Item created successfully');
+      res.status(201).json('Item created successfully');
+    })
+    .catch((err) => {
+      console.log(err.messsage);
+      res.status(400).json(err.message);
+    });
 })
 
 app.delete('/api/deleteAll', (req, res, next) => {
-  console.log('inside DELETE');
   Todo.deleteMany({})
-    .then(response => console.log(response))
-    .catch(err => console.log(err.messsage));
-  res.status(200).json();
+    .then(() => {
+      console.log('Clear all successful');
+      res.status(200).json('Clear all successful');
+    })
+    .catch(err => {
+      console.log(err.messsage);
+      res.status(400).json(err.message);
+    });
 })
 
 app.delete('/api/deleteOne/:id', (req, res, next) => {
-  console.log('inside delete one');
   const { id } = req.params;
-  console.log(id);
   Todo.deleteOne({ _id: id })
-    .then(response => console.log(response))
-    .catch(err => console.log(err.message));
-  res.status(200).json();
+    .then(() => {
+      console.log('Delete one successful');
+      res.status(200).json('Delete one successful');
+    })
+    .catch(err => {
+      console.log(err.messsage);
+      res.status(400).json(err.message);
+    });
 })
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
+
 
 module.exports = app;
