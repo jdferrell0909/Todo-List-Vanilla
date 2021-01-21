@@ -1,15 +1,16 @@
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const { Todo } = require('./models/TodoModel.js');
 
 const app = express();
-const PORT = 3000;
-const mongoURI = `mongodb+srv://james:james@ecomm.t2urc.mongodb.net/VanillaJS?retryWrites=true&w=majority`
-
+dotenv.config();
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, "../")));
+
+const PORT = 3000;
+const mongoURI = process.env.MONGO_URI;
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
