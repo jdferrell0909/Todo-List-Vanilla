@@ -1,5 +1,5 @@
 const getList = () => {
-  axios.get('/api')
+  axios.get('/api/items')
     .then(({ data }) => {
       data.forEach(item => displayTodo(item.text, item._id));
     })
@@ -28,7 +28,7 @@ function handleClickDeleteOrCheck(e) {
 
 function handleClearAll(e) {
   document.querySelector('ul').innerHTML = '';
-  axios.delete('/api/deleteAll')
+  axios.delete('/api/items/deleteAll')
     .then(({ data }) => console.log(data))
     .catch(err => err.message);
 }
@@ -36,7 +36,7 @@ function handleClearAll(e) {
 
 // Helpers
 const addTodo = (todo) => {
-  axios.post('/api/addItem', { text: todo })
+  axios.post('/api/items/addItem', { text: todo })
     .then(({ data }) => console.log(data))
     .catch(err => console.log(err));
   displayTodo(todo);
@@ -66,7 +66,7 @@ const checkTodo = (e) => {
 const deleteTodo = (e) => {
   let item = e.target.parentNode;
   item.classList.add('todo-list-item-fall');
-  axios.delete(`/api/deleteOne/${e.target.id}`)
+  axios.delete(`/api/items/deleteOne/${e.target.id}`)
       .then(({ data }) => console.log(data))
       .catch(err => console.log(err.message));
 }
