@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="client/auth.css">
+  <base href="/">
+  <link rel="stylesheet" type="text/css" href="client/auth.css">
   <title>Log In</title>
 </head>
 <body class="container">
@@ -11,16 +12,16 @@
     <h2>Welcome to the Todo List</h2>
   </header>
 
-  <div>
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
+  <div class="inputs">
+    <form>
+      <input id="username" type="text" name="username" placeholder="Username">
+      <input id="password" type="password" name="password" placeholder="Password">
+      <button id="loginbtn" type="submit" name="loginButton">Log In</button>
+      <!-- <button id="signupbtn" type="submit" name="signupButton">Sign Up</button> -->
+    </form>
   </div>
 
-  <div>
-    <button type="submit" name="loginButton">Log In</button>
-    <button type="submit" name="signupButton">Sign Up</button>
-  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="client/auth.js"></script>
 </body>
-
-<script type="text/javascript" src="client/auth.js"></script>
 </html>
